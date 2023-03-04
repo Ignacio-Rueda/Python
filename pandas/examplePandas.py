@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+
 serie = pd.Series([1,2,3])
 
 serie.name="nombre"
@@ -8,7 +11,8 @@ df = pd.DataFrame({'column1':[1,2,3,4],'column2':['a','b','c','d']})
 
 print(df.shape)#Indica tamaño
 print("**********************************")
-ul = pd.read_csv('practiceCsv.csv',header=None)
+ul = pd.read_excel('practice.xlsx')
+#ul = pd.read_csv('practices.csv') 
 print(ul)
 print("**********************************")
 print(ul.head())#Return first five rows
@@ -37,9 +41,9 @@ print(ul.sort_values("Light",ascending=False)) #We can sort by the value of a co
 print("**********************************")
 print(ul[["Light","Gas"]])#Select the column we want to show
 print("**********************************")
-print(ul[:4])#Show first four rows
-print("**********************************")
-print(ul.iloc[[0,11],[1,3]])#Show content of specific rows and columns
+print(ul[:4])#Show first *** rows
+print("************SPECIFIC ROWS AND COLUMNS**********************")
+print(ul.iloc[[0,10],[0,1,2,3]])#Show content of specific rows and columns
 print("**********************************")
 print(ul[ul["Light"]>100]) #Show the bill major to...
 print(ul[(ul["Light"]>5)&(ul["Gas"]>5)]) #Or filter results
@@ -61,3 +65,17 @@ print(ul["Gas"].mean())
 print("**********************************")
 #Compute median
 print(ul["Gas"].median())
+print("**********************************")
+print(ul['Light'].apply(lambda x:-x)) #Lambda x let us acces differente values Light
+print("**********************************")
+ul_group = ul.groupby('Month')['Light'].mean()
+print(ul_group) #Return mean of every month (only light)
+ul_group.name="meanLight"
+ul_join = ul.join(ul_group,on=["Month"],how="inner")
+print(ul_join)
+#Graphically display the data
+#ul["Light"].plot()
+#ul.plot(figsize=[10,10]) #size
+ul.plot(kind='bar')
+plt.savefig("Image.jpg")#Save grapthics
+plt.show() #desplegamos el gráfico
