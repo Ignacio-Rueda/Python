@@ -77,5 +77,5 @@ print(ul_join)
 #ul["Light"].plot()
 #ul.plot(figsize=[10,10]) #size
 ul.plot(kind='bar')
-plt.savefig("Image.jpg")#Save grapthics
+plt.savefig("Image.jpg")#Save graphics
 plt.show() #desplegamos el gráfico
